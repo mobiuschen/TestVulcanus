@@ -1,0 +1,6 @@
+.DS_Store
+.actionScriptProperties
+.project
+.settings
+*.ipa
+bin-debug/
