@@ -1,6 +1,5 @@
 package
 {
-    import flash.display.ColorCorrection;
     import flash.display.Shape;
     import flash.display.Sprite;
     import flash.display.StageAlign;

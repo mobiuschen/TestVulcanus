@@ -24,7 +24,7 @@ package
         
         private var _canvas:Bitmap;
         
-        private var _mapDatas:Vector.<int>;
+        private var _mapDatas:Vector.<Vector.<int>>;
         
         private var _mapContainer:Sprite;
         
@@ -76,9 +76,9 @@ package
             
             //地图描述数据
             var n:int = MAP_BORDER_TILE_NUM * MAP_BORDER_TILE_NUM;
-            _mapDatas = new Vector.<int>(n, true);
+            _mapDatas = new Vector.<Vector.<int>>(n, true);
             for(i = 0; i < n; i++)
-                _mapDatas[i] = 0;
+                _mapDatas[i] = new <int>[0, 0, 0, 0];
         }
         
         private function initImg():void
@@ -120,7 +120,7 @@ package
             var idx:int = int(evt.localY / TILE_SIZE) * MAP_BORDER_TILE_NUM + int(evt.localX / TILE_SIZE);
             /*
             0,1
-            3,4
+            2,3
             0 是点击点
             */
             var rightOutOfBorder:Boolean = (idx % MAP_BORDER_TILE_NUM + 1) >= MAP_BORDER_TILE_NUM;
@@ -137,35 +137,47 @@ package
         
         private function handlMap(aroundIdxes:Vector.<int>):void
         {
-            /*
-            4 8
-            1 2
-            */
+            trace(aroundIdxes);
             
-            var tileWeights:Vector.<int> = new <int>[4, 8, 1, 2];
-            var tileIdx:int;
-            for(var i:int = 0, n:int = aroundIdxes.length; i < n; i++)
-            {
-                tileIdx = aroundIdxes[i];
-                if(tileIdx < 0 || tileIdx >= _mapDatas.length)
-                    continue;
-                if(tileWeights[i] == _mapDatas[tileIdx])
-                    continue;
-                var targetWeight:int = _mapDatas[tileIdx] + tileWeights[i];
-                if(targetWeight >= _bpdVector.length)
-                    targetWeight = _bpdVector.length - 1;
-                if(targetWeight == _mapDatas[tileIdx])
-                    continue;
-                
-                _mapDatas[tileIdx] = targetWeight;
-                updateTile(tileIdx, targetWeight);
-            }
+            var l:int = _mapDatas.length;
+            var idx:int;
+            
+            //点击点
+            idx = aroundIdxes[0];
+            if(idx >= 0 && idx <= l && _mapDatas[idx][3] != 4)
+                _mapDatas[idx][3] = 4;
+            
+            //右
+            idx = aroundIdxes[1];
+            if(idx >= 0 && idx <= l && _mapDatas[idx][1] != 8)
+                _mapDatas[idx][1] = 8;
+            
+            //下
+            idx = aroundIdxes[2];
+            if(idx >= 0 && idx <= l && _mapDatas[idx][2] != 1)
+                _mapDatas[idx][2] = 1;
+            
+            //右下
+            idx = aroundIdxes[3];
+            if(idx >= 0 && idx <= l && _mapDatas[idx][0] != 2)
+                _mapDatas[idx][0] = 2;
+            
+            updateTile(aroundIdxes[0]);
+            updateTile(aroundIdxes[1]);
+            updateTile(aroundIdxes[2]);
+            updateTile(aroundIdxes[3]);
         }
         
         
-        private function updateTile(idx:int, weight:int):void
+        private function updateTile(idx:int):void
         {
-            trace("updateTile", idx, weight); 
+            if(idx < 0 || idx >= _mapDatas.length)
+                return;
+            
+            var weight:int = 0;
+            for each(var w:int in _mapDatas[idx])
+                weight += w;
+                
             var srcBpd:BitmapData = _bpdVector[weight];
             var desP:Point = 
                 new Point(
