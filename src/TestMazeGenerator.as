@@ -4,7 +4,6 @@ package
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
-    import flash.events.MouseEvent;
     import flash.geom.Point;
     import flash.geom.Rectangle;
     import flash.geom.Vector3D;
@@ -31,26 +30,52 @@ package
             stage.scaleMode = StageScaleMode.NO_SCALE;
             
             init();
+            
+            
         }
         
         
         private function init():void
         {
+            /*
             graphics.beginFill(0x555555);
             graphics.drawRect(AREA.x, AREA.y, AREA.width, AREA.height);
             graphics.endFill();
             
-            var points:Vector.<Point> = generatePoints(P_NUM, AREA); 
-            stage.addEventListener(MouseEvent.CLICK, onClickStage);
-            
-            
-            
-            function onClickStage(evt:MouseEvent):void
+            var points:Vector.<Point> = generatePoints(P_NUM, AREA);
+            for(var i:int = 0; i < 2; i++)
             {
+                //多次渲染叠加, 可以产生少量环路, 增加游戏乐趣.
                 var lines:Vector.<Line> = joint(points);
                 renderShapes(points, lines);
+            }*/
+            
+            
+            var mg:MapGenerator = new MapGenerator();
+            renderMap(mg.getMap(30, 50));
+        }
+        
+        
+        private function renderMap(map:Vector.<Vector.<int>>):void
+        {
+            var h:int = map.length;
+            var w:int = map[0].length;
+            var tileSize:int = 10;
+            
+            var colorDict:Object = {};
+            colorDict[MapGenerator.WALL_INT] = 0x888888;
+            colorDict[MapGenerator.ROAD_INT] = 0xFFCC66;
+            var shape:Shape = new Shape();
+            for(var i:int = 0; i < h; i++)
+            {
+                for(var j:int = 0; j < w; j++)
+                {
+                    shape.graphics.beginFill(colorDict[map[i][j]]);
+                    shape.graphics.drawRect(j * tileSize, i * tileSize, tileSize, tileSize);
+                }
             }
-                
+            shape.graphics.endFill();
+            addChild(shape);
         }
         
         
@@ -316,4 +341,27 @@ package
             return false;
         }
     }
+}
+
+
+import flash.geom.Point;
+
+class Line
+{
+    
+    public function Line(distance:Number, p1:Point, p2:Point)
+    {
+        this.distance = distance;
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+    
+    public function toString():String
+    {
+        return "[p1=(" +p1.x + ", " + p1.y + "), p2=(" + p2.x + ", " + p2.y + "), distance=" + distance + "]";
+    }
+    
+    public var distance:Number;
+    public var p1:Point;
+    public var p2:Point
 }
