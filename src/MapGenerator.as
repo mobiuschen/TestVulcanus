@@ -2,6 +2,8 @@ package
 {
     import flash.geom.Point;
     
+    import asunit.framework.Assert;
+    
 
     public class MapGenerator
     {
@@ -119,44 +121,23 @@ package
                     
                     //m是列数, n是行数
                     var flg:Boolean = false;
-                    
-                    
-                    flg = d(j - 1, i - 1, j, i) || flg;
-                    //trace(j, i, result.length);
-                    flg = d(j - 1, i, j, i) || flg;
-                    //trace(j, i, result.length);
-                    flg = d(j - 1, i + 1, j, i) || flg;//左下
-                    //trace(j, i, result.length);
-                    flg = d(j, i - 1, j, i) || flg;
-                    //trace(j, i, result.length);
-                    flg = d(j, i + 1, j, i) || flg;//下
-                    //trace(j, i, result.length);
-                    flg = d(j + 1, i - 1, j, i) || flg;
-                    //trace(j, i, result.length);
-                    flg = d(j + 1, i, j, i) || flg;//右
-                    //trace(j, i, result.length);
-                    flg = d(j + 1, i + 1, j, i) || flg;//右下
-                    //trace(j, i, result.length);
-                    //trace("----------");
-                    
+                    var traceArr:Array = [];
                     
                     //其实只要计算右边和下面的邻接点就可以了
-                    /*flg = d(j - 1, i + 1, j, i) || flg;//左下
-                    trace(j, i, result.length);
-                    flg = d(j, i + 1, j, i) || flg;//下
-                    trace(j, i, result.length);
-                    flg = d(j + 1, i, j, i) || flg;//右
-                    trace(j, i, result.length);
-                    flg = d(j + 1, i + 1, j, i) || flg;//右下
-                    trace(j, i, result.length);
-                    trace("----------");*/
-                    
-                    if(!flg)
-                    {
-                        //周围都是墙的情况
-                        trace("Solo Point");
+                    d(j - 1, i + 1, j, i);//左下
+                    traceArr.push(result.length);
+                    d(j, i + 1, j, i);//下
+                    traceArr.push(result.length);
+                    d(j + 1, i, j, i);//右
+                    traceArr.push(result.length);
+                    d(j + 1, i + 1, j, i);//右下
+                    traceArr.push(result.length);
+                    if(!hasBeenCollect(j, i))
                         result.push(new <Point>[new Point(j, i)]);
-                    }
+                    
+                    traceArr.push("SoloPoint");
+                    trace(traceArr);
+                    trace("----------");
                 }//for
             }//for
                 
@@ -168,6 +149,8 @@ package
                     return false;
                 if(x2 < 0 || x2 >= m || y2 < 0 || y2 >= n || map[y2][x2] == WALL_INT)
                     return false;
+                
+                Assert.assertTrue(x1 != x2 || y1 != y2);
                 
                 var vec1:Vector.<Point> = null;
                 var vec2:Vector.<Point> = null;
@@ -198,6 +181,19 @@ package
                 }
                 
                 return true;
+            }
+            
+            function hasBeenCollect(x:int, y:int):Boolean
+            {
+                for each(var vec:Vector.<Point> in result)
+                {
+                    for each(var p:Point in vec)
+                    {
+                        if(x == p.x && y == p.y)
+                            return true;
+                    }
+                }
+                return false;
             }
         }
         
