@@ -105,12 +105,17 @@ package
             //trace(rN, wN);
         }
         
-        
+
+        /**
+         * 计算map中有几个连接在一起的"块".
+         *  
+         * @param map
+         * @return 
+         * 
+         */        
         private function calCollections(map:Vector.<Vector.<int>>):Vector.<Vector.<Point>>
         {
             var result:Vector.<Vector.<Point>> = new Vector.<Vector.<Point>>();
-            
-            //填充数据
             for(var i:int = 0, n:int = map.length; i < n; i++)
             {
                 var row:Vector.<int> = map[i];
@@ -118,32 +123,20 @@ package
                 {
                     if(row[j] == WALL_INT)
                         continue;
-                    
                     //m是列数, n是行数
-                    var flg:Boolean = false;
-                    var traceArr:Array = [];
-                    
                     //其实只要计算右边和下面的邻接点就可以了
-                    d(j - 1, i + 1, j, i);//左下
-                    traceArr.push(result.length);
-                    d(j, i + 1, j, i);//下
-                    traceArr.push(result.length);
-                    d(j + 1, i, j, i);//右
-                    traceArr.push(result.length);
-                    d(j + 1, i + 1, j, i);//右下
-                    traceArr.push(result.length);
+                    checkSameCollection(j - 1, i + 1, j, i);//左下
+                    checkSameCollection(j, i + 1, j, i);//下
+                    checkSameCollection(j + 1, i, j, i);//右
+                    checkSameCollection(j + 1, i + 1, j, i);//右下
                     if(!hasBeenCollect(j, i))
                         result.push(new <Point>[new Point(j, i)]);
-                    
-                    traceArr.push("SoloPoint");
-                    trace(traceArr);
-                    trace("----------");
                 }//for
             }//for
                 
             return result;
             
-            function d(x1:int, y1:int, x2:int, y2:int):Boolean
+            function checkSameCollection(x1:int, y1:int, x2:int, y2:int):Boolean
             {
                 if(x1 < 0 || x1 >= m || y1 < 0 || y1 >= n || map[y1][x1] == WALL_INT)
                     return false;
