@@ -11,6 +11,7 @@ package
     import flash.text.TextField;
     import flash.text.TextFormat;
     
+    import asunit.framework.Test;
     import asunit.textui.TestRunner;
     
     import im.mobius.view.RawComponent;
@@ -45,9 +46,12 @@ package
             //var test:Test = new TestCase_LogBatch();
             //runner.doRun(test, true);
             
+            var test:Test = new TestCase_MapGenerator();
+            runner.doRun(test, true);
+            
             //runner.start(TestCase_LogBatch, "testSaveLog", true);
             //runner.start(TestCase_LogBatch, null, true);
-            initUI();
+            //initUI();
         }
         
         

@@ -104,7 +104,7 @@ package
         }
         
         
-        static public function calCollections(map:Vector.<Vector.<int>>):Vector.<Vector.<Point>>
+        private function calCollections(map:Vector.<Vector.<int>>):Vector.<Vector.<Point>>
         {
             var result:Vector.<Vector.<Point>> = new Vector.<Vector.<Point>>();
             
@@ -121,32 +121,33 @@ package
                     var flg:Boolean = false;
                     
                     
-                    flg ||= d(j - 1, i - 1, j, i);
-                    trace(j, i, result.length);
-                    flg ||= d(j - 1, i, j, i);
-                    trace(j, i, result.length);
-                    flg ||= d(j - 1, i + 1, j, i);//左下
-                    trace(j, i, result.length);
-                    flg ||= d(j, i - 1, j, i);
-                    trace(j, i, result.length);
-                    flg ||= d(j, i + 1, j, i);//下
-                    trace(j, i, result.length);
-                    flg ||= d(j + 1, i - 1, j, i);
-                    trace(j, i, result.length);
-                    flg ||= d(j + 1, i, j, i);//右
-                    trace(j, i, result.length);
-                    flg ||= d(j + 1, i + 1, j, i);//右下
-                    trace(j, i, result.length);
-                    trace("----------");
+                    flg = d(j - 1, i - 1, j, i) || flg;
+                    //trace(j, i, result.length);
+                    flg = d(j - 1, i, j, i) || flg;
+                    //trace(j, i, result.length);
+                    flg = d(j - 1, i + 1, j, i) || flg;//左下
+                    //trace(j, i, result.length);
+                    flg = d(j, i - 1, j, i) || flg;
+                    //trace(j, i, result.length);
+                    flg = d(j, i + 1, j, i) || flg;//下
+                    //trace(j, i, result.length);
+                    flg = d(j + 1, i - 1, j, i) || flg;
+                    //trace(j, i, result.length);
+                    flg = d(j + 1, i, j, i) || flg;//右
+                    //trace(j, i, result.length);
+                    flg = d(j + 1, i + 1, j, i) || flg;//右下
+                    //trace(j, i, result.length);
+                    //trace("----------");
+                    
                     
                     //其实只要计算右边和下面的邻接点就可以了
-                    /*flg ||= d(j - 1, i + 1, j, i);//左下
+                    /*flg = d(j - 1, i + 1, j, i) || flg;//左下
                     trace(j, i, result.length);
-                    flg ||= d(j, i + 1, j, i);//下
+                    flg = d(j, i + 1, j, i) || flg;//下
                     trace(j, i, result.length);
-                    flg ||= d(j + 1, i, j, i);//右
+                    flg = d(j + 1, i, j, i) || flg;//右
                     trace(j, i, result.length);
-                    flg ||= d(j + 1, i + 1, j, i);//右下
+                    flg = d(j + 1, i + 1, j, i) || flg;//右下
                     trace(j, i, result.length);
                     trace("----------");*/
                     
@@ -158,35 +159,8 @@ package
                     }
                 }//for
             }//for
-            
-            trace("check", check());
-            
+                
             return result;
-            
-            
-            function check():Boolean
-            {
-                for(var i:int = 0, n:int = result.length; i < n; i++)
-                {
-                    trace("result length at", i, result[i].length);
-                    for(var j:int = 0, m:int = result[i].length; j < m; j++)
-                    {
-                        var p:Point = result[i][j];
-                        for(var i1:int = 0, n1:int = result.length; i1 < n1; i1++)
-                        {
-                            for(var j1:int = 0, m1:int = result[i1].length; j1 < m1; j1++)
-                            {
-                                if(i == i1 && j == j1)
-                                    continue;
-                                var p1:Point = result[i1][j1];
-                                if(p.x == p1.x && p.y == p1.y)
-                                    return false;
-                            }
-                        }                        
-                    }
-                }
-                return true;
-            }//function check
             
             function d(x1:int, y1:int, x2:int, y2:int):Boolean
             {
@@ -195,8 +169,8 @@ package
                 if(x2 < 0 || x2 >= m || y2 < 0 || y2 >= n || map[y2][x2] == WALL_INT)
                     return false;
                 
-                var vec1:Vector.<Point>;
-                var vec2:Vector.<Point>;
+                var vec1:Vector.<Point> = null;
+                var vec2:Vector.<Point> = null;
                 for each(var vec:Vector.<Point> in result)
                 {
                     for each(var p:Point in vec)
@@ -226,5 +200,12 @@ package
                 return true;
             }
         }
-    }
-}
+        
+        
+        public function _testCalCollections(map:Vector.<Vector.<int>>):Vector.<Vector.<Point>>
+        {
+            return calCollections(map);
+        }
+            
+    }//class
+}//package
