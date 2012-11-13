@@ -4,6 +4,7 @@ package
     import flash.display.Sprite;
     import flash.display.StageAlign;
     import flash.display.StageScaleMode;
+    import flash.geom.Point;
     import flash.geom.Rectangle;
     
     import im.mobius.map.MapGenerator;
@@ -36,7 +37,12 @@ package
         private function init():void
         {
             var mg:MapGenerator = new MapGenerator();
-            renderMap(mg.generateMap(AREA.width, AREA.height, 0.3));
+            renderMap(
+                mg.generateMap(
+                    AREA.width, AREA.height,
+                    new Point(0, 0), new Point(AREA.width - 1, int(AREA.height/2))
+                )
+            );
         }
         
         
