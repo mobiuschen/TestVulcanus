@@ -160,7 +160,7 @@ package im.mobius.vulcanus.unitest
         private function checkMap(map:Vector.<Vector.<int>>, collectionNum:int):void
         {
             var mg:MapGenerator = new MapGenerator();
-            var clc:Vector.<Vector.<Point>> = mg._testCalCollections(map);
+            var clc:Vector.<Vector.<Point>> = mg._testCalPiles(map);
             assertTrue(checkElementRepeat(clc));
             assertEquals(collectionNum, clc.length);
         }

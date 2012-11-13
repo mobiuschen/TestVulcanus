@@ -11,7 +11,7 @@ package
     
     public class TestTerrain extends Sprite
     {
-        [Embed(source="../assets/terrain_tile.png")]
+        [Embed(source="/terrain_tile.png")]
         private const TERRAIN_IMG:Class;
         
         /*** 地块尺寸 */        
