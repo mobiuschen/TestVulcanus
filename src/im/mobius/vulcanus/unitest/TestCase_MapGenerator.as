@@ -1,8 +1,10 @@
-package
+package im.mobius.vulcanus.unitest
 {
     import flash.geom.Point;
     
     import asunit.framework.TestCase;
+    
+    import im.mobius.map.MapGenerator;
     
     public class TestCase_MapGenerator extends TestCase
     {

@@ -144,22 +144,22 @@ package
             
             //点击点
             idx = aroundIdxes[0];
-            if(idx >= 0 && idx <= l && _mapDatas[idx][3] != 4)
+            if(idx >= 0 && idx < l && _mapDatas[idx][3] != 4)
                 _mapDatas[idx][3] = 4;
             
             //右
             idx = aroundIdxes[1];
-            if(idx >= 0 && idx <= l && _mapDatas[idx][1] != 8)
+            if(idx >= 0 && idx < l && _mapDatas[idx][1] != 8)
                 _mapDatas[idx][1] = 8;
             
             //下
             idx = aroundIdxes[2];
-            if(idx >= 0 && idx <= l && _mapDatas[idx][2] != 1)
+            if(idx >= 0 && idx < l && _mapDatas[idx][2] != 1)
                 _mapDatas[idx][2] = 1;
             
             //右下
             idx = aroundIdxes[3];
-            if(idx >= 0 && idx <= l && _mapDatas[idx][0] != 2)
+            if(idx >= 0 && idx < l && _mapDatas[idx][0] != 2)
                 _mapDatas[idx][0] = 2;
             
             updateTile(aroundIdxes[0]);

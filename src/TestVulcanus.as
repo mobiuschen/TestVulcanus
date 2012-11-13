@@ -15,6 +15,7 @@ package
     import asunit.textui.TestRunner;
     
     import im.mobius.view.RawComponent;
+    import im.mobius.vulcanus.unitest.TestCase_MapGenerator;
     
     public class TestVulcanus extends Sprite
     {
