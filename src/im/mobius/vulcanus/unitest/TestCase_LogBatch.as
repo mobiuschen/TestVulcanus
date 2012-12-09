@@ -6,11 +6,11 @@ package im.mobius.vulcanus.unitest
     import flash.display.DisplayObjectContainer;
     import flash.filesystem.File;
     
-    import im.mobius.debug.DarkFog;
-    import im.mobius.debug.Debugger;
-    import im.mobius.debug.LogBatch;
-    import im.mobius.debug.LogEntity;
-    import im.mobius.debug.LogType;
+    import im.mobius.vulcanus.zax.debug.DarkFog;
+    import im.mobius.vulcanus.zax.debug.Debugger;
+    import im.mobius.vulcanus.zax.debug.LogBatch;
+    import im.mobius.vulcanus.zax.debug.LogEntity;
+    import im.mobius.vulcanus.zax.debug.LogType;
     
     /**
      * 

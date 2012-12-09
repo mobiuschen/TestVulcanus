@@ -7,7 +7,7 @@ package
     import flash.geom.Point;
     import flash.geom.Rectangle;
     
-    import im.mobius.map.MapGenerator;
+    import im.mobius.vulcanus.map.MapGenerator;
     
     /**
      * Test Cases: 0个点, 1个点, 2个点, 所有点都在一条直线上.

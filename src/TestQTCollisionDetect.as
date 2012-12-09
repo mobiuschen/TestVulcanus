@@ -59,7 +59,7 @@ package
                     getOneShape(
                         0, 0, 
                         5 + Math.random() * minGridSize, 
-                        5 + Math.random() * minGridSize, 
+                        5 + Math.random() * minGridSize,
                         BLOCK_COLOR
                     );
                 shape.x = Math.random() * (area.width - minGridSize -5);

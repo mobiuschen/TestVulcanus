@@ -12,8 +12,7 @@ package im.mobius.benchmark
     import flash.geom.Rectangle;
     import flash.utils.Timer;
     
-    import im.mobius.ui.RollingPlanetUI;
-    import im.mobius.view.RawComponent;
+    import im.mobius.vulcanus.view.RawComponent;
     
     public class RenderBenchMark extends Sprite
     {

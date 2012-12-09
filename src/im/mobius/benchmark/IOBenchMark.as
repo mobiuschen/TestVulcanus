@@ -10,8 +10,8 @@ package im.mobius.benchmark
     import flash.system.System;
     import flash.utils.setTimeout;
     
-    import im.mobius.debug.Debugger;
-    import im.mobius.view.RawComponent;
+    import im.mobius.vulcanus.debug.Debugger;
+    import im.mobius.vulcanus.view.RawComponent;
     
     /**
      * IO性能测试基准 

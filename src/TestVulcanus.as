@@ -14,8 +14,8 @@ package
     import asunit.framework.Test;
     import asunit.textui.TestRunner;
     
-    import im.mobius.view.RawComponent;
-    import im.mobius.vulcanus.unitest.TestCase_MapGenerator;
+    import im.mobius.vulcanus.unitest.TestCase_ZaxFile;
+    import im.mobius.vulcanus.view.RawComponent;
     
     public class TestVulcanus extends Sprite
     {
@@ -47,7 +47,8 @@ package
             //var test:Test = new TestCase_LogBatch();
             //runner.doRun(test, true);
             
-            var test:Test = new TestCase_MapGenerator();
+            //var test:Test = new TestCase_MapGenerator();
+            var test:Test = new TestCase_ZaxFile();
             runner.doRun(test, true);
             
             //runner.start(TestCase_LogBatch, "testSaveLog", true);

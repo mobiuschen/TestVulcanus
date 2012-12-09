@@ -5,7 +5,7 @@ package im.mobius.vulcanus.unitest
     
     import asunit.framework.TestCase;
     
-    import im.mobius.QuadTree;
+    import im.mobius.vulcanus.QuadTree;
     
     public class TestCase_QuadTree extends TestCase
     {

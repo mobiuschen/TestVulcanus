@@ -4,7 +4,7 @@ package im.mobius.vulcanus.unitest
     
     import asunit.framework.TestCase;
     
-    import im.mobius.map.MapGenerator;
+    import im.mobius.vulcanus.map.MapGenerator;
     
     public class TestCase_MapGenerator extends TestCase
     {

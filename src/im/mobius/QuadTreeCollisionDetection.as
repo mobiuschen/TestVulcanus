@@ -3,6 +3,8 @@ package im.mobius
     import flash.display.DisplayObject;
     import flash.filters.GlowFilter;
     import flash.geom.Rectangle;
+    
+    import im.mobius.vulcanus.QuadTree;
 
     public class QuadTreeCollisionDetection
     {
