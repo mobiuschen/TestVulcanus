@@ -45,15 +45,9 @@ package
             addChild(runner);
             
             //var test:Test = new TestCase_LogBatch();
-            //runner.doRun(test, true);
-            
             //var test:Test = new TestCase_MapGenerator();
             var test:Test = new TestCase_ZaxFile();
-            runner.doRun(test, true);
-            
-            //runner.start(TestCase_LogBatch, "testSaveLog", true);
-            //runner.start(TestCase_LogBatch, null, true);
-            //initUI();
+            runner.start(TestCase_ZaxFile, "testInterruptClose", true);
         }
         
         
